@@ -1,4 +1,4 @@
-[문제](https://sueaty.tistory.com/40)
+[문제](https://www.acmicpc.net/problem/2875)
 -----------------------
 
 <br>
