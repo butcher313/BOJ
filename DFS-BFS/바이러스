@@ -1,0 +1,83 @@
+[문제]()
+-----------
+
+<br>
+<br>
+
+### 1. 코드
+```cpp
+#include <iostream>
+#include <vector>
+#include <queue>
+#define MAX 110
+
+using namespace std;
+
+int COM;
+int NET;
+int map[MAX][MAX];
+bool visit[MAX] = { false };
+
+int answer = 0;
+
+void dfs(int s) {
+
+	visit[s] = true;
+
+	for (int i = 1; i <= COM; i++) {
+		if (visit[i] || !map[s][i]) continue;
+
+		answer++;
+		dfs(i);
+	}
+}
+
+
+void bfs(int v) {
+
+	queue <int> q;
+	q.push(v);
+	visit[v] = true;
+
+	while (!q.empty()) {
+
+		v = q.front(); // v = 5
+
+		for (int i = 1; i <= COM; i++) {
+
+			if (visit[i] == 1 || map[v][i] == 0) continue;
+
+			visit[i] = true;
+			q.push(i);
+			answer++;
+		}
+		
+		q.pop();
+	}
+}
+
+int main() {
+
+	cin >> COM;
+	cin >> NET;
+
+	for (int i = 1; i <= NET; i++) {
+		int r, c;
+		cin >> r >> c;
+		map[r][c] = 1;
+		map[c][r] = 1;
+	}
+
+	dfs(1);
+    bfs(1);
+
+	cout << answer;
+}
+```
+
+<br>
+
+### 2. 코멘트
+
+    정신줄 놓고 풀면 이런 기본문제도 한참 끌게된다. for (int i = 1; i <= COM; i++) 이 부분에서 i <= COM 조건을 i <= NET으로 했었다.
+    간선 개수는 노드 개수보다 많을 수 있으므로 이 경우, 런타임 에러가 발생하게 된다. 
